@@ -17,16 +17,17 @@
 """
 
 import argparse
-import glob
 import json
 import os
-import re
 import subprocess
 import sys
 import time
 
-SCRIPT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "distribute.py")
-COMPARE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "compare_with_etalon.py")
+_HERE = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.abspath(os.path.join(_HERE, ".."))
+# дефолтные пути: run_tests.py лежит в tests/, а distribute.py — в agent/scripts/
+SCRIPT = os.path.join(ROOT, "agent", "scripts", "distribute.py")
+COMPARE = os.path.join(_HERE, "compare_with_etalon.py")
 
 
 def run(args, workdir):
@@ -46,8 +47,14 @@ def main():
     ap.add_argument("--out", default=os.path.join(os.path.dirname(SCRIPT), "..", "tests"))
     args = ap.parse_args()
 
-    datasets = [d.strip() for d in args.datasets.split(",") if d.strip()]
-    out_root = args.out
+    # Приводим все пути к абсолютным: субпроцессы запускаются с cwd=папка
+    # distribute.py, поэтому относительные пути (от корня репо) иначе ломаются.
+    datasets = [os.path.abspath(d.strip()) for d in args.datasets.split(",") if d.strip()]
+    out_root = os.path.abspath(args.out)
+    dist_dir = os.path.abspath(os.path.dirname(str(args.distribute)))
+    dist = os.path.join(dist_dir, "distribute.py")
+    comp_dir = os.path.abspath(os.path.dirname(str(args.compare)))
+    comp = os.path.join(comp_dir, "compare_with_etalon.py")
     os.makedirs(out_root, exist_ok=True)
 
     summary = {}
@@ -65,22 +72,23 @@ def main():
             run_dir = os.path.join(out_root, f"{dsname}_run{i}")
             os.makedirs(run_dir, exist_ok=True)
             result_path = os.path.join(run_dir, "result_cloud.xlsx")
-            dist = os.path.join(os.path.dirname(str(args.distribute)), "distribute.py")
             p, dt = run([
                 sys.executable, dist,
                 "--ful", os.path.join(ds, "ful_1c.xlsx"),
                 "--cloud", os.path.join(ds, "cloud.xlsx"),
                 "--staff", os.path.join(ds, "staff_1c.xlsx"),
                 "--out", run_dir,
-            ], os.path.dirname(dist))
+            ], dist_dir)
             total_time += dt
+            if p.returncode != 0:
+                print(f"[{dsname}] distribute.py упал (run{i}):\n{p.stdout}\n{p.stderr}")
+                sys.exit(1)
             # сверка
-            c = os.path.join(os.path.dirname(str(args.compare)), "compare_with_etalon.py")
             pc, _ = run([
-                sys.executable, c,
+                sys.executable, comp,
                 "--result", result_path,
                 "--etalon", os.path.join(ds, "etalon.xlsx"),
-            ], os.path.dirname(c))
+            ], comp_dir)
             try:
                 m = json.loads(pc.stdout)
             except Exception:
