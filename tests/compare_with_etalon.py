@@ -51,9 +51,6 @@ def main():
 
     etalon_rows = read_rows(args.etalon, "Эталон")
     journal = read_rows(args.result, "Журнал решений")
-    new_rows = read_rows(args.result, "Новые строки Cloud")
-    repl_rows = read_rows(args.result, "Повторные отправки")
-    attn_rows = read_rows(args.result, "Требует внимания")
     gap_rows = read_rows(args.result, "Возможные пропуски")
 
     # журнал агента по номеру ФУЛ
@@ -62,23 +59,6 @@ def main():
         f = r.get("Номер ФУЛ")
         if f:
             journal_by_ful[key_of_ful_num(f)] = r
-
-    # новые строки по заказу (для сверки группы/логиста)
-    new_by_order = {}
-    for r in new_rows:
-        o = r.get("Заказ")
-        if o:
-            new_by_order[norm(str(o))] = r
-
-    # повторные по заказу
-    repl_orders = {norm(str(r.get("Заказ"))) for r in repl_rows}
-
-    # attention: сопоставим по номеру ФУЛ из листа (колонка «Номер ФУЛ»)
-    attn_by_ful = {}
-    for r in attn_rows:
-        f = r.get("Номер ФУЛ")
-        if f:
-            attn_by_ful[key_of_ful_num(f)] = r
 
     # возможные пропуски — по заказу
     gap_orders = {norm(str(r.get("Заказ"))) for r in gap_rows}
@@ -92,11 +72,6 @@ def main():
     decision_acc_ok = 0
     logist_acc_n = 0
     logist_acc_ok = 0
-
-    def map_got_status(exp):
-        for r in journal:
-            pass
-        return None
 
     for row in etalon_rows:
         key = row.get("Ключ(Заказ/ФУЛ)") or row.get("ФУЛ/Заказ")

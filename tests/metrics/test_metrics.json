@@ -1,11 +1,11 @@
 {
   "set1": {
     "datasets_dir": "C:\\s21\\projects\\GigaCowork\\data\\datasets\\set1",
-    "n_runs": 3,
+    "n_runs": 1,
     "avg_exact_match": 1.0,
     "avg_accuracy_decision": 1.0,
     "avg_accuracy_logist": 1.0,
-    "avg_time_s": 2.547,
+    "avg_time_s": 5.427,
     "reproducible": true,
     "runs": [
       {
@@ -14,93 +14,7 @@
         "accuracy_decision": 1.0,
         "accuracy_logist": 1.0,
         "mismatches": [],
-        "time_s": 2.218
-      },
-      {
-        "total_ful": 16,
-        "exact_match_fraction": 1.0,
-        "accuracy_decision": 1.0,
-        "accuracy_logist": 1.0,
-        "mismatches": [],
-        "time_s": 2.521
-      },
-      {
-        "total_ful": 16,
-        "exact_match_fraction": 1.0,
-        "accuracy_decision": 1.0,
-        "accuracy_logist": 1.0,
-        "mismatches": [],
-        "time_s": 2.903
-      }
-    ]
-  },
-  "set_trap": {
-    "datasets_dir": "C:\\s21\\projects\\GigaCowork\\data\\datasets\\set_trap",
-    "n_runs": 3,
-    "avg_exact_match": 1.0,
-    "avg_accuracy_decision": 1.0,
-    "avg_accuracy_logist": 1.0,
-    "avg_time_s": 2.53,
-    "reproducible": true,
-    "runs": [
-      {
-        "total_ful": 15,
-        "exact_match_fraction": 1.0,
-        "accuracy_decision": 1.0,
-        "accuracy_logist": 1.0,
-        "mismatches": [],
-        "time_s": 2.49
-      },
-      {
-        "total_ful": 15,
-        "exact_match_fraction": 1.0,
-        "accuracy_decision": 1.0,
-        "accuracy_logist": 1.0,
-        "mismatches": [],
-        "time_s": 2.386
-      },
-      {
-        "total_ful": 15,
-        "exact_match_fraction": 1.0,
-        "accuracy_decision": 1.0,
-        "accuracy_logist": 1.0,
-        "mismatches": [],
-        "time_s": 2.712
-      }
-    ]
-  },
-  "set_chk": {
-    "datasets_dir": "C:\\s21\\projects\\GigaCowork\\data\\datasets\\set_chk",
-    "n_runs": 3,
-    "avg_exact_match": 1.0,
-    "avg_accuracy_decision": 1.0,
-    "avg_accuracy_logist": 1.0,
-    "avg_time_s": 2.631,
-    "reproducible": true,
-    "runs": [
-      {
-        "total_ful": 16,
-        "exact_match_fraction": 1.0,
-        "accuracy_decision": 1.0,
-        "accuracy_logist": 1.0,
-        "mismatches": [],
-        "time_s": 2.674
-      },
-      {
-        "total_ful": 16,
-        "exact_match_fraction": 1.0,
-        "accuracy_decision": 1.0,
-        "accuracy_logist": 1.0,
-        "mismatches": [],
-        "time_s": 2.6
-      },
-      {
-        "total_ful": 16,
-        "exact_match_fraction": 1.0,
-        "accuracy_decision": 1.0,
-        "accuracy_logist": 1.0,
-        "mismatches": [],
-        "time_s": 2.619
+        "time_s": 5.427
       }
     ]
   }

@@ -89,6 +89,9 @@ def main():
                 "--result", result_path,
                 "--etalon", os.path.join(ds, "etalon.xlsx"),
             ], comp_dir)
+            if pc.returncode != 0:
+                print(f"[{dsname}] compare_with_etalon.py упал (run{i}):\n{pc.stdout}\n{pc.stderr}")
+                sys.exit(1)
             try:
                 m = json.loads(pc.stdout)
             except Exception:
