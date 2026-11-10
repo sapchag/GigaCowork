@@ -5,7 +5,7 @@
     "avg_exact_match": 1.0,
     "avg_accuracy_decision": 1.0,
     "avg_accuracy_logist": 1.0,
-    "avg_time_s": 5.427,
+    "avg_time_s": 29.225,
     "reproducible": true,
     "runs": [
       {
@@ -14,7 +14,45 @@
         "accuracy_decision": 1.0,
         "accuracy_logist": 1.0,
         "mismatches": [],
-        "time_s": 5.427
+        "time_s": 29.225
+      }
+    ]
+  },
+  "set_trap": {
+    "datasets_dir": "C:\\s21\\projects\\GigaCowork\\data\\datasets\\set_trap",
+    "n_runs": 1,
+    "avg_exact_match": 1.0,
+    "avg_accuracy_decision": 1.0,
+    "avg_accuracy_logist": 1.0,
+    "avg_time_s": 9.655,
+    "reproducible": true,
+    "runs": [
+      {
+        "total_ful": 15,
+        "exact_match_fraction": 1.0,
+        "accuracy_decision": 1.0,
+        "accuracy_logist": 1.0,
+        "mismatches": [],
+        "time_s": 9.655
+      }
+    ]
+  },
+  "set_chk": {
+    "datasets_dir": "C:\\s21\\projects\\GigaCowork\\data\\datasets\\set_chk",
+    "n_runs": 1,
+    "avg_exact_match": 1.0,
+    "avg_accuracy_decision": 1.0,
+    "avg_accuracy_logist": 1.0,
+    "avg_time_s": 19.826,
+    "reproducible": true,
+    "runs": [
+      {
+        "total_ful": 16,
+        "exact_match_fraction": 1.0,
+        "accuracy_decision": 1.0,
+        "accuracy_logist": 1.0,
+        "mismatches": [],
+        "time_s": 19.826
       }
     ]
   }

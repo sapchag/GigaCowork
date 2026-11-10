@@ -155,13 +155,19 @@ def build_staff_index(staff):
 
 
 def resolve_logist_short(name, staff):
-    """Сопоставить короткое имя/ФИО логиста из Cloud с сотрудником 1С."""
+    """Сопоставить короткое имя/ФИО логиста из Cloud с сотрудником 1С.
+
+    Возвращает сотрудника или None. Если короткому имени соответствует БОЛЕЕ
+    одного сотрудника (коллизия фамилия + инициал), считаем неоднозначным и
+    возвращаем None — такой ЛУЛ уходит в «Требует внимания», а не назначается
+    молча первому из списка.
+    """
     if not name:
         return None
     n = norm_soft(name)
-    for s in staff:
-        if match_short_name(n, s.get("_norm_name", "")):
-            return s
+    matches = [s for s in staff if match_short_name(n, s.get("_norm_name", ""))]
+    if len(matches) == 1:
+        return matches[0]
     return None
 
 
@@ -285,15 +291,13 @@ def process(ful, cloud, staff):
     repeats = []          # повторные отправки
     attention = []        # требует внимания
     journal = []          # журнал решений по каждому ФУЛ
-    new_keys = set()      # номера заказов, уже созданных в этой пачке (дубль внутри пачки)
-    seen_ful_in_pack = [] # (norm supplier, order, ful_date) для поиска повторов в пачке
 
-    ful_sorted = sorted(ful, key=lambda f: parse_datetime(f["date"]) or datetime.min())
+    ful_sorted = sorted(ful, key=lambda f: parse_datetime(f["date"]) or datetime.min)
     # приоритет: минимальная дата (сначала старые, чтобы «возможные пропуски» корректно)
 
     # Нормализация дат
     for f in ful:
-        f["_dt"] = parse_datetime(f["date"]) or datetime.min()
+        f["_dt"] = parse_datetime(f["date"]) or datetime.min
         f["_norm_supplier"] = norm_supplier(f["supplier"])
         f["_order_key"] = norm_key(f["order"])
 
@@ -454,7 +458,7 @@ def process(ful, cloud, staff):
     # ==================== возможные пропуски ====================
     # ФУЛ, которые пришли раньше последней записи в Cloud, но заказа в Cloud нет.
     if cloud:
-        last_cloud = max((parse_datetime(c["date_ul"]) or datetime.min()) for c in cloud)
+        last_cloud = max((parse_datetime(c["date_ul"]) or datetime.min) for c in cloud)
     else:
         last_cloud = None
     gaps = []
