@@ -12,8 +12,22 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import mm
 from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import (SimpleDocTemplate, Paragraph, Spacer, Table,
                                 TableStyle, PageBreak)
+
+# DejaVu Sans поддерживает кириллицу (в отличие от Helvetica/Arial Type1).
+_DEJAVU = "C:/Windows/Fonts/DejaVuSans.ttf"
+_DEJAVU_BOLD = "C:/Windows/Fonts/DejaVuSans-Bold.ttf"
+if os.path.exists(_DEJAVU):
+    pdfmetrics.registerFont(TTFont("DejaVu", _DEJAVU))
+    pdfmetrics.registerFont(TTFont("DejaVu-Bold", _DEJAVU_BOLD))
+    FONT = "DejaVu"
+    FONT_BOLD = "DejaVu-Bold"
+else:
+    FONT = "Helvetica"
+    FONT_BOLD = "Helvetica-Bold"
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 METRICS = os.path.join(ROOT, "tests", "metrics", "test_metrics.json")
@@ -57,12 +71,17 @@ def main():
     scenarios = load_md(os.path.join(ROOT, "docs", "scenarios_and_assumptions.md"))
 
     styles = getSampleStyleSheet()
-    h1 = ParagraphStyle("h1r", parent=styles["Title"], fontSize=16, spaceAfter=8)
-    h2 = ParagraphStyle("h2r", parent=styles["Heading2"], fontSize=13, spaceBefore=10, spaceAfter=4)
-    h3 = ParagraphStyle("h3r", parent=styles["Heading3"], fontSize=11.5, spaceBefore=6, spaceAfter=2)
-    p = ParagraphStyle("pr", parent=styles["BodyText"], fontSize=10, leading=13)
-    li = ParagraphStyle("lir", parent=p, leftIndent=14, bulletIndent=6)
-    small = ParagraphStyle("small", parent=p, fontSize=9, textColor=colors.grey)
+    h1 = ParagraphStyle("h1r", parent=styles["Title"], fontSize=16, spaceAfter=8,
+                        fontName=FONT_BOLD)
+    h2 = ParagraphStyle("h2r", parent=styles["Heading2"], fontSize=13, spaceBefore=10,
+                        spaceAfter=4, fontName=FONT_BOLD)
+    h3 = ParagraphStyle("h3r", parent=styles["Heading3"], fontSize=11.5, spaceBefore=6,
+                        spaceAfter=2, fontName=FONT_BOLD)
+    p = ParagraphStyle("pr", parent=styles["BodyText"], fontSize=10, leading=13,
+                       fontName=FONT)
+    li = ParagraphStyle("lir", parent=p, leftIndent=14, bulletIndent=6, fontName=FONT)
+    small = ParagraphStyle("small", parent=p, fontSize=9, textColor=colors.grey,
+                           fontName=FONT)
 
     doc = SimpleDocTemplate(
         os.path.join(ROOT, "report", "Отчёт_тестовое_задание_GigaCowork.pdf"),
@@ -132,7 +151,8 @@ def main():
     t.setStyle(TableStyle([
         ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#EEEEEE")),
         ("GRID", (0, 0), (-1, -1), 0.4, colors.grey),
-        ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+        ("FONTNAME", (0, 0), (-1, 0), FONT_BOLD),
+        ("FONTNAME", (0, 1), (-1, -1), FONT),
         ("FONTSIZE", (0, 0), (-1, -1), 8.5),
         ("VALIGN", (0, 0), (-1, -1), "TOP"),
         ("LEFTPADDING", (0, 0), (-1, -1), 4),
@@ -214,7 +234,8 @@ def main():
     t.setStyle(TableStyle([
         ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#EEEEEE")),
         ("GRID", (0, 0), (-1, -1), 0.4, colors.grey),
-        ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+        ("FONTNAME", (0, 0), (-1, 0), FONT_BOLD),
+        ("FONTNAME", (0, 1), (-1, -1), FONT),
         ("FONTSIZE", (0, 0), (-1, -1), 8.5),
         ("ALIGN", (0, 0), (-1, -1), "CENTER"),
         ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
@@ -270,7 +291,8 @@ def main():
     t.setStyle(TableStyle([
         ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#EEEEEE")),
         ("GRID", (0, 0), (-1, -1), 0.4, colors.grey),
-        ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+        ("FONTNAME", (0, 0), (-1, 0), FONT_BOLD),
+        ("FONTNAME", (0, 1), (-1, -1), FONT),
         ("FONTSIZE", (0, 0), (-1, -1), 7.5),
         ("ALIGN", (0, 0), (-1, -1), "LEFT"),
         ("TOPPADDING", (0, 0), (-1, -1), 2),
@@ -340,7 +362,8 @@ def main():
     t.setStyle(TableStyle([
         ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#EEEEEE")),
         ("GRID", (0, 0), (-1, -1), 0.4, colors.grey),
-        ("FONTNAME", (0, 0), (-1, 0), "Helvetica-Bold"),
+        ("FONTNAME", (0, 0), (-1, 0), FONT_BOLD),
+        ("FONTNAME", (0, 1), (-1, -1), FONT),
         ("FONTSIZE", (0, 0), (-1, -1), 8.5),
         ("ALIGN", (0, 0), (-1, -1), "CENTER"),
         ("VALIGN", (0, 0), (-1, -1), "MIDDLE"),
