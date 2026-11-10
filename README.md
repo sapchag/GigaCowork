@@ -23,7 +23,7 @@
 agent/                    # навык для GigaCowork (SKILL.md, системный промпт, скрипты, справочники)
   SKILL.md                # файл навыка (YAML-блок + инструкция модели)
   system_prompt.txt       # системный промпт агента
-  scripts/                # distribute.py (правила), gigacowork_lib.py (утилиты)
+  scripts/                # distribute.py (правила), run_agent_via_api.py (GigaChat), gigacowork_lib.py (утилиты)
   references/             # distribution_rules.md (справочник)
 data/
   generate_data.py        # генератор синтетических данных и эталона (вымышленные данные)
@@ -114,6 +114,28 @@ python tests/run_tests.py \
     --compare tests/compare_with_etalon.py \
     --out tests/metrics
 ```
+
+### Запуск с моделью GigaChat (пересказ результата)
+
+Правила всегда исполняет `distribute.py` (офлайн). Чтобы дополнительно прогнать
+через языковую модель GigaChat (модель готовит ответ пользователю по шаблону):
+
+```
+pip install langchain-gigachat
+# ключ передаётся ТОЛЬКО через переменные окружения (в коде/логах его нет):
+#   GIGACHAT_API_KEY  (base64 от client_id:auth_key)  или пара CLIENT_ID+AUTH_KEY
+
+python agent/scripts/run_agent_via_api.py \
+    --ful data/datasets/set1/ful_1c.xlsx \
+    --cloud data/datasets/set1/cloud.xlsx \
+    --staff data/datasets/set1/staff_1c.xlsx \
+    --out <папка результата> \
+    --prompt agent/system_prompt.txt \
+    --model "GigaChat-2-Pro"
+```
+
+Подробности и варианты ключей — в
+[`docs/Инструкция_по_установке_и_запуску.md`](docs/Инструкция_по_установке_и_запуску.md).
 
 ## Вопросы заказчику / принятые допущения
 
