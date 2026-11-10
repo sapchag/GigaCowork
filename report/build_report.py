@@ -8,6 +8,8 @@ import json
 import os
 from datetime import datetime
 
+import openpyxl
+
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import mm
 from reportlab.lib import colors
@@ -41,6 +43,52 @@ def load_metrics():
 def load_md(path):
     with open(path, encoding="utf-8") as f:
         return f.read()
+
+
+def load_new_rows(rel_path, limit=5):
+    """Прочитать реальные «Новые строки Cloud» из result_cloud.xlsx набора set1_run1.
+
+    Возвращает первые `limit` строк в порядке файла. Формат дат приводим к
+    ДД.ММ.ГГ. (как в остальном отчёте) во избежание расхождений с фактическим
+    результатом.
+    """
+    path = os.path.join(ROOT, rel_path)
+    if not os.path.exists(path):
+        return None
+    wb = openpyxl.load_workbook(path, data_only=True)
+    ws = wb["Новые строки Cloud"]
+    header = [c.value for c in ws[1]]
+    rows = []
+    for r in ws.iter_rows(min_row=2, values_only=True):
+        if not any(v is not None and str(v).strip() for v in r):
+            continue
+        if len(rows) >= limit:
+            break
+        rec = dict(zip(header, r))
+        row = [
+            rec.get("Заказ", ""),
+            rec.get("Поставщик", ""),
+            rec.get("Бренд", ""),
+            rec.get("Логист", ""),
+            rec.get("Статус", ""),
+            rec.get("Cut-off", ""),
+            rec.get("Дата получения УЛ", ""),
+            rec.get("Страна отправления", "") or rec.get("Страна", ""),
+            rec.get("Способ доставки", ""),
+        ]
+
+        def fmt(v):
+            if isinstance(v, (datetime,)):
+                return v.strftime("%d.%m.%y")
+            if hasattr(v, "isoformat"):
+                return v.strftime("%d.%m.%y")
+            return "" if v is None else str(v)
+
+        row[5] = fmt(rec.get("Cut-off"))
+        row[6] = fmt(rec.get("Дата получения УЛ"))
+        rows.append(row)
+    wb.close()
+    return rows
 
 
 def md_to_paragraphs(text):
@@ -280,14 +328,14 @@ def main():
         story.append(Paragraph(l_.replace("<", "&lt;").replace(">", "&gt;"), small))
     story.append(Spacer(1, 4))
 
-    # фрагмент новых строк
-    sample = [
-        ["Заказ", "Поставщик", "Бренд", "Логист", "Статус", "Cut-off", "Дата получения УЛ", "Страна", "Способ"],
-        ["S000601", "Shenzhen Fashion Co.", "Zara", "Виноградов С.", "в работе", "01.06.26", "12.05.26", "Китай", "air"],
-        ["S000602", "Shanghai Apparel Group", "H&M", "Орлова М.", "в работе", "01.06.26", "12.05.26", "Китай", "air"],
-        ["S000603", "Гуанчжоу Текстиль Лтд", "Пальмира", "Белова Н.", "в работе", "02.06.26", "13.05.26", "Китай", "sea"],
-        ["S000604", "Delhi Cotton House", "Детский Мир", "Морозова А.", "в работе", "02.06.26", "13.05.26", "Индия", "sea"],
-    ]
+    # фрагмент новых строк — из реального результата set1_run1 (не выдуман)
+    sample = load_new_rows(os.path.join("tests", "metrics", "set1_run1", "result_cloud.xlsx"), limit=5)
+    if sample:
+        sample.insert(0, ["Заказ", "Поставщик", "Бренд", "Логист", "Статус", "Cut-off",
+                          "Дата получения УЛ", "Страна", "Способ"])
+    else:
+        sample = [["Заказ", "Поставщик", "Бренд", "Логист", "Статус", "Cut-off",
+                   "Дата получения УЛ", "Страна", "Способ"]]
     t = Table(sample, colWidths=[18*mm, 36*mm, 22*mm, 26*mm, 16*mm, 16*mm, 24*mm, 14*mm, 14*mm])
     t.setStyle(TableStyle([
         ("BACKGROUND", (0, 0), (-1, 0), colors.HexColor("#EEEEEE")),
