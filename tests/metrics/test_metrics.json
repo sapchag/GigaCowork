@@ -1,11 +1,11 @@
 {
   "set1": {
-    "datasets_dir": "C:\\s21\\projects\\GigaCowork\\data\\datasets\\set1",
+    "datasets_dir": "C:/s21/projects/GigaCowork/data/datasets/set1",
     "n_runs": 3,
     "avg_exact_match": 1.0,
     "avg_accuracy_decision": 1.0,
     "avg_accuracy_logist": 1.0,
-    "avg_time_s": 7.688,
+    "avg_time_s": 2.974,
     "reproducible": true,
     "runs": [
       {
@@ -14,7 +14,7 @@
         "accuracy_decision": 1.0,
         "accuracy_logist": 1.0,
         "mismatches": [],
-        "time_s": 7.783
+        "time_s": 3.111
       },
       {
         "total_ful": 16,
@@ -22,7 +22,7 @@
         "accuracy_decision": 1.0,
         "accuracy_logist": 1.0,
         "mismatches": [],
-        "time_s": 5.343
+        "time_s": 3.029
       },
       {
         "total_ful": 16,
@@ -30,17 +30,17 @@
         "accuracy_decision": 1.0,
         "accuracy_logist": 1.0,
         "mismatches": [],
-        "time_s": 9.938
+        "time_s": 2.781
       }
     ]
   },
   "set_trap": {
-    "datasets_dir": "C:\\s21\\projects\\GigaCowork\\data\\datasets\\set_trap",
+    "datasets_dir": "C:/s21/projects/GigaCowork/data/datasets/set_trap",
     "n_runs": 3,
     "avg_exact_match": 1.0,
     "avg_accuracy_decision": 1.0,
     "avg_accuracy_logist": 1.0,
-    "avg_time_s": 7.671,
+    "avg_time_s": 2.909,
     "reproducible": true,
     "runs": [
       {
@@ -49,7 +49,7 @@
         "accuracy_decision": 1.0,
         "accuracy_logist": 1.0,
         "mismatches": [],
-        "time_s": 6.268
+        "time_s": 2.736
       },
       {
         "total_ful": 15,
@@ -57,7 +57,7 @@
         "accuracy_decision": 1.0,
         "accuracy_logist": 1.0,
         "mismatches": [],
-        "time_s": 11.175
+        "time_s": 3.111
       },
       {
         "total_ful": 15,
@@ -65,17 +65,17 @@
         "accuracy_decision": 1.0,
         "accuracy_logist": 1.0,
         "mismatches": [],
-        "time_s": 5.57
+        "time_s": 2.88
       }
     ]
   },
   "set_chk": {
-    "datasets_dir": "C:\\s21\\projects\\GigaCowork\\data\\datasets\\set_chk",
+    "datasets_dir": "C:/s21/projects/GigaCowork/data/datasets/set_chk",
     "n_runs": 3,
     "avg_exact_match": 1.0,
     "avg_accuracy_decision": 1.0,
     "avg_accuracy_logist": 1.0,
-    "avg_time_s": 3.418,
+    "avg_time_s": 3.508,
     "reproducible": true,
     "runs": [
       {
@@ -84,7 +84,7 @@
         "accuracy_decision": 1.0,
         "accuracy_logist": 1.0,
         "mismatches": [],
-        "time_s": 3.759
+        "time_s": 4.378
       },
       {
         "total_ful": 16,
@@ -92,7 +92,7 @@
         "accuracy_decision": 1.0,
         "accuracy_logist": 1.0,
         "mismatches": [],
-        "time_s": 3.774
+        "time_s": 3.116
       },
       {
         "total_ful": 16,
@@ -100,7 +100,7 @@
         "accuracy_decision": 1.0,
         "accuracy_logist": 1.0,
         "mismatches": [],
-        "time_s": 2.721
+        "time_s": 3.03
       }
     ]
   }

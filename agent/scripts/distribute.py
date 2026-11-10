@@ -16,10 +16,11 @@
 import argparse
 import os
 import sys
+from datetime import datetime
 
 import openpyxl
 
-from gigacowork_lib import (norm_key, norm_soft, find_column, parse_datetime,
+from gigacowork_lib import (norm_key, norm_soft, parse_datetime,
                             fmt_date, extract_order_number, determine_group,
                             role_group, is_working, match_short_name,
                             norm_supplier)
@@ -341,6 +342,7 @@ def process(ful, cloud, staff):
             entry["status"] = "repeat_pack"
             repeats.append({
                 "order": f["order"], "ful": f["fyl_num"], "supplier": f["supplier"],
+                "kind": "repeat_pack",
                 "note": "Повторная отправка ФУЛа (дубль в пачке), " + fmt_date(f["date"]),
             })
             journal.append({
@@ -355,6 +357,7 @@ def process(ful, cloud, staff):
             entry["status"] = "repeat_cloud"
             repeats.append({
                 "order": f["order"], "ful": f["fyl_num"], "supplier": f["supplier"],
+                "kind": "repeat_cloud",
                 "note": "Повторная отправка ФУЛа, " + fmt_date(f["date"]),
             })
             journal.append({
@@ -369,6 +372,7 @@ def process(ful, cloud, staff):
             entry["status"] = "repeat_pack"
             repeats.append({
                 "order": f["order"], "ful": f["fyl_num"], "supplier": f["supplier"],
+                "kind": "repeat_pack",
                 "note": "Повторная отправка ФУЛа (дубль в пачке), " + fmt_date(f["date"]),
             })
             journal.append({
@@ -530,8 +534,8 @@ def write_result(path, data, new_rows):
 def summarize(data):
     new_count = sum(1 for r in data["results"] if r["status"] == "new")
     att_count = len(data["attention"])
-    # повторные отправки: отдельно повторы из Cloud и из пачки
-    rep_cloud = sum(1 for r in data["repeats"] if "Cloud" in r.get("note", ""))
+    # повторные отправки: отдельно повторы из Cloud (заказ уже есть) и дубли в пачке
+    rep_cloud = sum(1 for r in data["repeats"] if r.get("kind") == "repeat_cloud")
     rep_pack = len(data["repeats"]) - rep_cloud
     return {
         "new": new_count,
