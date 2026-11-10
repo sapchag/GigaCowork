@@ -1,11 +1,11 @@
 {
   "set1": {
     "datasets_dir": "C:\\s21\\projects\\GigaCowork\\data\\datasets\\set1",
-    "n_runs": 1,
+    "n_runs": 3,
     "avg_exact_match": 1.0,
     "avg_accuracy_decision": 1.0,
     "avg_accuracy_logist": 1.0,
-    "avg_time_s": 29.225,
+    "avg_time_s": 1.735,
     "reproducible": true,
     "runs": [
       {
@@ -14,17 +14,33 @@
         "accuracy_decision": 1.0,
         "accuracy_logist": 1.0,
         "mismatches": [],
-        "time_s": 29.225
+        "time_s": 1.814
+      },
+      {
+        "total_ful": 16,
+        "exact_match_fraction": 1.0,
+        "accuracy_decision": 1.0,
+        "accuracy_logist": 1.0,
+        "mismatches": [],
+        "time_s": 1.687
+      },
+      {
+        "total_ful": 16,
+        "exact_match_fraction": 1.0,
+        "accuracy_decision": 1.0,
+        "accuracy_logist": 1.0,
+        "mismatches": [],
+        "time_s": 1.704
       }
     ]
   },
   "set_trap": {
     "datasets_dir": "C:\\s21\\projects\\GigaCowork\\data\\datasets\\set_trap",
-    "n_runs": 1,
+    "n_runs": 3,
     "avg_exact_match": 1.0,
     "avg_accuracy_decision": 1.0,
     "avg_accuracy_logist": 1.0,
-    "avg_time_s": 9.655,
+    "avg_time_s": 1.613,
     "reproducible": true,
     "runs": [
       {
@@ -33,17 +49,33 @@
         "accuracy_decision": 1.0,
         "accuracy_logist": 1.0,
         "mismatches": [],
-        "time_s": 9.655
+        "time_s": 1.676
+      },
+      {
+        "total_ful": 15,
+        "exact_match_fraction": 1.0,
+        "accuracy_decision": 1.0,
+        "accuracy_logist": 1.0,
+        "mismatches": [],
+        "time_s": 1.649
+      },
+      {
+        "total_ful": 15,
+        "exact_match_fraction": 1.0,
+        "accuracy_decision": 1.0,
+        "accuracy_logist": 1.0,
+        "mismatches": [],
+        "time_s": 1.515
       }
     ]
   },
   "set_chk": {
     "datasets_dir": "C:\\s21\\projects\\GigaCowork\\data\\datasets\\set_chk",
-    "n_runs": 1,
+    "n_runs": 3,
     "avg_exact_match": 1.0,
     "avg_accuracy_decision": 1.0,
     "avg_accuracy_logist": 1.0,
-    "avg_time_s": 19.826,
+    "avg_time_s": 1.559,
     "reproducible": true,
     "runs": [
       {
@@ -52,7 +84,23 @@
         "accuracy_decision": 1.0,
         "accuracy_logist": 1.0,
         "mismatches": [],
-        "time_s": 19.826
+        "time_s": 1.533
+      },
+      {
+        "total_ful": 16,
+        "exact_match_fraction": 1.0,
+        "accuracy_decision": 1.0,
+        "accuracy_logist": 1.0,
+        "mismatches": [],
+        "time_s": 1.591
+      },
+      {
+        "total_ful": 16,
+        "exact_match_fraction": 1.0,
+        "accuracy_decision": 1.0,
+        "accuracy_logist": 1.0,
+        "mismatches": [],
+        "time_s": 1.554
       }
     ]
   }
