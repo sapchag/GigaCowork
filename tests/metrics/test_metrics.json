@@ -5,7 +5,7 @@
     "avg_exact_match": 1.0,
     "avg_accuracy_decision": 1.0,
     "avg_accuracy_logist": 1.0,
-    "avg_time_s": 1.735,
+    "avg_time_s": 6.805,
     "reproducible": true,
     "runs": [
       {
@@ -14,7 +14,7 @@
         "accuracy_decision": 1.0,
         "accuracy_logist": 1.0,
         "mismatches": [],
-        "time_s": 1.814
+        "time_s": 4.721
       },
       {
         "total_ful": 16,
@@ -22,7 +22,7 @@
         "accuracy_decision": 1.0,
         "accuracy_logist": 1.0,
         "mismatches": [],
-        "time_s": 1.687
+        "time_s": 8.843
       },
       {
         "total_ful": 16,
@@ -30,7 +30,7 @@
         "accuracy_decision": 1.0,
         "accuracy_logist": 1.0,
         "mismatches": [],
-        "time_s": 1.704
+        "time_s": 6.852
       }
     ]
   },
@@ -40,7 +40,7 @@
     "avg_exact_match": 1.0,
     "avg_accuracy_decision": 1.0,
     "avg_accuracy_logist": 1.0,
-    "avg_time_s": 1.613,
+    "avg_time_s": 6.78,
     "reproducible": true,
     "runs": [
       {
@@ -49,7 +49,7 @@
         "accuracy_decision": 1.0,
         "accuracy_logist": 1.0,
         "mismatches": [],
-        "time_s": 1.676
+        "time_s": 12.235
       },
       {
         "total_ful": 15,
@@ -57,7 +57,7 @@
         "accuracy_decision": 1.0,
         "accuracy_logist": 1.0,
         "mismatches": [],
-        "time_s": 1.649
+        "time_s": 5.963
       },
       {
         "total_ful": 15,
@@ -65,7 +65,7 @@
         "accuracy_decision": 1.0,
         "accuracy_logist": 1.0,
         "mismatches": [],
-        "time_s": 1.515
+        "time_s": 2.143
       }
     ]
   },
@@ -75,7 +75,7 @@
     "avg_exact_match": 1.0,
     "avg_accuracy_decision": 1.0,
     "avg_accuracy_logist": 1.0,
-    "avg_time_s": 1.559,
+    "avg_time_s": 2.995,
     "reproducible": true,
     "runs": [
       {
@@ -84,7 +84,7 @@
         "accuracy_decision": 1.0,
         "accuracy_logist": 1.0,
         "mismatches": [],
-        "time_s": 1.533
+        "time_s": 2.189
       },
       {
         "total_ful": 16,
@@ -92,7 +92,7 @@
         "accuracy_decision": 1.0,
         "accuracy_logist": 1.0,
         "mismatches": [],
-        "time_s": 1.591
+        "time_s": 2.486
       },
       {
         "total_ful": 16,
@@ -100,7 +100,7 @@
         "accuracy_decision": 1.0,
         "accuracy_logist": 1.0,
         "mismatches": [],
-        "time_s": 1.554
+        "time_s": 4.311
       }
     ]
   }

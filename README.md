@@ -141,6 +141,16 @@ python agent/scripts/run_agent_via_api.py \
 
 Полный список — в [`docs/scenarios_and_assumptions.md`](docs/scenarios_and_assumptions.md).
 
+## Готовые артефакты для сдачи
+
+Папка `deliverable/` содержит упакованные файлы для приёмки:
+
+- `agent.zip` — навык в формате GigaCowork (SKILL.md, scripts/, references/, системный
+  промпт) + короткая инструкция по установке и запуску;
+- `test_data.zip` — синтетические данные: три файла Excel, эталон и генератор.
+
+Подробный PDF-отчёт о выполненном задании — в `report/Отчёт_тестовое_задание_GigaCowork.pdf`.
+
 ## Контакты
 
 Задание: разработка агентов на GigaCowork (заказчик — «Салют для Бизнеса»).
